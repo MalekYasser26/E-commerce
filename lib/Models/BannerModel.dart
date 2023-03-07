@@ -1,0 +1,1 @@
+class BannerModel{  int? id ;  String? image ;  BannerModel.fromJson({required Map<String,dynamic>datafromAPI }){    id = datafromAPI['id'];    image = datafromAPI['image'];  }}
