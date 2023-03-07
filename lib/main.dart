@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cubit/Register/register_cubit.dart';
+import 'cubit/bottom_nav_cubit.dart';
 void main() {
   Bloc.observer =MyBlocObserver();
   runApp(const MyApp());
@@ -22,9 +23,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => LoginCubit()),
-          BlocProvider(create: (context) => BannerCubit()),
-          BlocProvider(create: (context) => CategoryCubit()),
+          BlocProvider(create: (context) => BannerCubit()..getBanners()),
+          BlocProvider(create: (context) => CategoryCubit()..getCategories()),
           BlocProvider(create: (context) => RegisterCubit()),
+          BlocProvider(create: (context) => BottomNavigationCubit()),
+
 
 
 

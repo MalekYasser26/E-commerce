@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
-import 'package:ecommerce/Models/UserModel.dart';
 part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   final emailController = TextEditingController();

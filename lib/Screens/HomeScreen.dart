@@ -1,4 +1,5 @@
-import 'package:ecommerce/Screens/BoardingScreenModel.dart';
+import 'package:ecommerce/Models/BoardingScreenModel.dart';
+import 'package:ecommerce/Screens/BottomNavBarScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -86,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       setState(() {});
                     }
                     else {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavScreen(),));
                     }
                   },
                   child: Padding(

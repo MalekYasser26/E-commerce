@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:ecommerce/Models/CategoryModel.dart';
 import 'package:http/http.dart' as http ;
@@ -10,22 +9,32 @@ part 'category_state.dart';
 
 class CategoryCubit extends Cubit<CategoryState> {
   CategoryCubit() : super(CategoryInitial());
+  final CategoryController = PageController();
   List<CategoryModel> CategoryData=[];
-  void getBanners()async{
-    Response CategoryRes= await http.get(Uri.parse('https://student.valuxapps.com/api/banners'));
-    var CategoryDecoded=jsonDecode(CategoryRes.body);
-    if(CategoryDecoded['status']==true){
-      for (var item in CategoryDecoded['data'])   {       // بنلف علي كل بانر جوا الليست اوف ماب
-        CategoryData.add(CategoryModel.fromJson(CategoryDatafromAPI: {}));
+
+  Future<String> getCategories() async {
+    emit(CategoryLoadingState());
+    Response CategoryRes = await http.get(
+      Uri.parse('https://student.valuxapps.com/api/categories'),
+      headers: {
+        'lang': 'en',
+      },
+    );
+    var CategoryDecoded = jsonDecode(CategoryRes.body);
+    if (CategoryDecoded['status'] == true) {
+      for (var item in CategoryDecoded['data']['data']) {
+        CategoryData.add(CategoryModel.fromJson(CategorydatafromAPI: item));
       }
-      debugPrint('First item on BannesData is :  ${CategoryData.first.image}');
+      debugPrint('First item on CategoryData is: ${CategoryData.first.image}');
 
-      debugPrint('Banners data is ${CategoryDecoded}');
+      debugPrint('Categories data is ${CategoryDecoded}');
       emit(CategorySuccessState());
-    }
-    else {
-
+    } else {
+      CategoryData = [];
+      print("Category Data is: $CategoryDecoded");
       emit(CategoryFailureState());
     }
+    return "${CategoryDecoded}";
   }
+
 }
